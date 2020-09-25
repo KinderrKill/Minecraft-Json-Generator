@@ -1,0 +1,28 @@
+{
+  "template_slab": {
+    "texture": "$SLAB",
+    "blockstate": "slab",
+    "model-blocs": [
+      "slab-lower",
+      "slab-upper"
+    ],
+    "model-items": "slab"
+  },
+  "template_test": {
+    "texture": "$TEST",
+    "blockstate": "testBlockState",
+    "model-blocs": "testBlockState",
+    "model-items": "testBlockState"
+  },
+  "template_test_2": {
+    "texture": "$TEST2",
+    "blockstate": "test2",
+    "model-blocs": [
+      "test2-lower",
+      "test2-upper",
+      "test3",
+      "test4"
+    ],
+    "model-items": "test2"
+  }
+}
