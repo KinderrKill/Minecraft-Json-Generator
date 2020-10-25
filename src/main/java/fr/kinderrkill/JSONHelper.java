@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class JSONHelper {
@@ -26,11 +27,12 @@ public class JSONHelper {
         templateName = key;
     }
 
-    public JSONObject getRenamedJsonFromTemplate(File base, String key, String value) {
+    public JSONObject getRenamedObject(File base, String key, String value) {
         try {
             JSONObject jsonFile = (JSONObject) parser.parse(new FileReader(base));
-            jsonFile.replace(key, value);
-            return jsonFile;
+            String json = jsonFile.toJSONString();
+            json = json.replace(key, value);
+            return (JSONObject) parser.parse(json);
         } catch (IOException | ParseException e) {
             e.printStackTrace();
             return null;
@@ -63,17 +65,17 @@ public class JSONHelper {
     }
 
     public boolean haveMultipleModels() {
-        return getTemplateFromConfig(templateName).get("model-blocs") instanceof JSONArray;
+        return getTemplateFromConfig(templateName).get("model_blocks") instanceof JSONArray;
     }
 
     public List<String> getBlocksModels() {
         if (haveMultipleModels()) {
-            JSONArray jsonFile = (JSONArray) getTemplateFromConfig(templateName).get("model-blocs");
+            JSONArray jsonFile = (JSONArray) getTemplateFromConfig(templateName).get("model_blocks");
             List<String> list = new ArrayList<>();
             jsonFile.forEach(model -> list.add(model.toString()));
             return list;
         }
-        return Arrays.asList(getTemplateFromConfig(templateName).get("model-blocs").toString());
+        return Arrays.asList(getTemplateFromConfig(templateName).get("model_blocks").toString());
     }
 
 }

@@ -17,9 +17,6 @@ public class JsonGenerator {
     private File modelBlocksDir;
     private File modelItemsDir;
 
-    private String modelName = "";
-    private String modelTexture = "";
-
     public void launch() {
         try {
             File baseFile = new File(JsonGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
@@ -37,7 +34,6 @@ public class JsonGenerator {
     }
 
     public void generateJson(String modelName, String modelTexture) {
-
         Map<File, File> modelBlock = new HashMap<>();
 
         //Parents Files
@@ -61,12 +57,12 @@ public class JsonGenerator {
         }
 
         //Create renamed JSON
-        createJson(newBlockState, jsonHelper.getRenamedJsonFromTemplate(blockStateParent, "texture", modelTexture));
-        createJson(newModelItems, jsonHelper.getRenamedJsonFromTemplate(modelItemParent, "texture", modelTexture));
+        createJson(newBlockState, jsonHelper.getRenamedObject(blockStateParent, "$BLOCK", modelName));
+        createJson(newModelItems, jsonHelper.getRenamedObject(modelItemParent, "$ITEM", modelTexture));
 
         for (File f : modelBlock.keySet()) {
             File destination = modelBlock.get(f);
-            createJson(destination, jsonHelper.getRenamedJsonFromTemplate(f, "texture", modelTexture));
+            createJson(destination, jsonHelper.getRenamedObject(f, "$TEXTURE", modelTexture));
         }
     }
 

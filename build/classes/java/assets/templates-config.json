@@ -1,0 +1,15 @@
+{
+  "template_tile": {
+    "blockstate": "tile",
+    "model_blocks": "tile",
+    "model_items": "tile"
+  },
+  "template_slab": {
+    "blockstate": "slabBlockState",
+    "model_blocks": [
+      "slab_lower",
+      "slab_upper"
+    ],
+    "model_items": "slabItem"
+  }
+}

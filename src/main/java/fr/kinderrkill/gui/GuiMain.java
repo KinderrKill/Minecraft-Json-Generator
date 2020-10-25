@@ -60,7 +60,6 @@ public class GuiMain extends JFrame implements ActionListener {
 
         Object[] elements = generator.getJsonHelper().getAvailableTemplates().toArray();
         templates = new JComboBox(elements);
-        templates.setMaximumRowCount(10);
         templates.setBounds(getWidth()/4, 180, 250, 30);
         panel.add(templates);
 
