@@ -1,16 +1,18 @@
 package fr.kinderrkill;
 
-import java.net.URISyntaxException;
+import fr.kinderrkill.gui.GuiMain;
 
 public class Main {
 
     public static void main(String[] args) {
-        JsonGenerator generator = new JsonGenerator();
+        /*JsonGenerator generator = new JsonGenerator();
         try {
             generator.start();
         } catch (URISyntaxException e) {
             e.printStackTrace();
-        }
+        }*/
+        GuiMain guiMain = new GuiMain();
+        guiMain.launch();
     }
 
     public static void sendMessage(String message) {

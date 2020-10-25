@@ -4,115 +4,87 @@ import org.json.simple.JSONObject;
 
 import java.io.*;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Scanner;
+import java.util.*;
 
 public class JsonGenerator {
 
-    private final String s = "[JsonGenerator] ";
-    private final Scanner keyboard = new Scanner(System.in);
+    private final String PREFIX = "[JsonGenerator] ";
+    private final Scanner SCANNER = new Scanner(System.in);
 
-    private String templateName = "";
+    private JSONHelper jsonHelper;
 
-    private File baseFile;
-    private File templatesConfig;
-    private File blockstateDir;
+    private File blockStateDir;
     private File modelBlocksDir;
     private File modelItemsDir;
 
     private String modelName = "";
     private String modelTexture = "";
 
-    public void start() throws URISyntaxException {
-        baseFile = new File(JsonGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+    public void launch() {
+        try {
+            File baseFile = new File(JsonGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            File templatesConfig = new File(baseFile + "/assets/templates-config.json");
+            jsonHelper = new JSONHelper(templatesConfig);
 
-        templatesConfig = new File(baseFile + "/assets/templates-config.json");
-        blockstateDir = new File(baseFile + "/assets/blockstate/");
-        modelBlocksDir = new File(baseFile + "/assets/model-blocks/");
-        modelItemsDir = new File(baseFile + "/assets/model-items/");
+            blockStateDir = new File(baseFile + "/assets/blockstate/");
+            modelBlocksDir = new File(baseFile + "/assets/model-blocks/");
+            modelItemsDir = new File(baseFile + "/assets/model-items/");
 
-        sendMessage("Started successfully at the location : " + baseFile.getAbsolutePath());
-        askTemplate();
-    }
-
-    public void askTemplate() {
-        TemplateReader templateReader = new TemplateReader(templatesConfig);
-        sendMessage("Available template : " + templateReader.getAvailableTemplate());
-        sendMessage("What JSON Template do you want to use ?");
-        templateName = keyboard.nextLine();
-
-        sendMessage("> Template '" + templateName + "' selected - State = " + (templateReader.templateExist(templateName) ? "found !" : "not found !"));
-        if (!templateReader.templateExist(templateName)) {
-            askTemplate();
-        } else {
-            templateReader.initTemplate(templateName);
-            askForName();
+            sendMessage("Started successfully at the location : " + baseFile.getAbsolutePath());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
     }
 
-    private void askForName() {
-        sendMessage("What is the name of your Block ?");
-        modelName = keyboard.nextLine();
-        askForTexture();
-    }
+    public void generateJson(String modelName, String modelTexture) {
 
-    private void askForTexture() {
-        sendMessage("What is the name of your texture ?");
-        modelTexture = keyboard.nextLine();
-        initDirectoryAndCopy();
-    }
+        Map<File, File> modelBlock = new HashMap<>();
 
-    private void initDirectoryAndCopy() {
-        TemplateReader reader = new TemplateReader(templatesConfig);
-        File newBlockstateDir = new File(blockstateDir + "/parents/" + reader.getJsonArrayFromConfig("blockstate") + ".json");
-        File newModelBlocksDir = new File(modelBlocksDir + "/parents/" + reader.getJsonArrayFromConfig("model-blocs") + ".json");
-        File newModelItemsDir = new File(modelItemsDir + "/parents/" + reader.getJsonArrayFromConfig("model-items") + ".json");
+        //Parents Files
+        File blockStateParent = new File(blockStateDir + "/parents/" + jsonHelper.getStringFromTemplate("blockstate") + ".json");
+        File modelItemParent = new File(modelItemsDir + "/parents/" + jsonHelper.getStringFromTemplate("model-items") + ".json");
 
-        File newBlockstate = new File(blockstateDir + "/" + modelName + ".json");
-        File newModelBlocks = new File(modelBlocksDir + "/" + modelName + ".json");
+        List<File> modelBlocksParent = new ArrayList<>();
+        jsonHelper.getBlocksModels().forEach(model -> modelBlocksParent.add(new File(modelBlocksDir + "/parents/" + model + ".json")));
+
+        //News Files
+        File newBlockState = new File(blockStateDir + "/" + modelName + ".json");
         File newModelItems = new File(modelItemsDir + "/" + modelName + ".json");
 
-        System.out.println("EXIST : " + newBlockstateDir.exists());
-        TemplateReader r1 = new TemplateReader(newBlockstateDir);
-        System.out.println("TEST 2 : " + r1.getJsonObject());
-        try {
-            copyFileUsingStream(newBlockstateDir, newBlockstate);
-            renamedJson(newBlockstate, "texture");
+        //Define models blocks
+        for (File f : modelBlocksParent) {
+            if(modelBlocksParent.size() > 1) {
+                modelBlock.put(f, new File(modelBlocksDir + "/" + f.getName().replaceFirst("[.][^.]+$", "") + "-" + modelName + ".json"));
+            } else {
+                modelBlock.put(f, new File(modelBlocksDir + "/" + modelName + ".json"));
+            }
+        }
 
-            copyFileUsingStream(newModelBlocksDir, newModelBlocks);
-            renamedJson(newModelBlocks, "texture");
+        //Create renamed JSON
+        createJson(newBlockState, jsonHelper.getRenamedJsonFromTemplate(blockStateParent, "texture", modelTexture));
+        createJson(newModelItems, jsonHelper.getRenamedJsonFromTemplate(modelItemParent, "texture", modelTexture));
 
-            copyFileUsingStream(newModelItemsDir, newModelItems);
-            renamedJson(newModelItems, "texture");
+        for (File f : modelBlock.keySet()) {
+            File destination = modelBlock.get(f);
+            createJson(destination, jsonHelper.getRenamedJsonFromTemplate(f, "texture", modelTexture));
+        }
+    }
+
+    private void createJson(File destination, JSONObject jsonObject) {
+        try (FileWriter writer = new FileWriter(destination)) {
+            writer.write(jsonObject.toJSONString());
+            writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    private void renamedJson(File file, String key) {
-        TemplateReader reader = new TemplateReader(file);
-        JSONObject obj = reader.renamedJSONObject(key, modelName);
-        System.out.println("DEBUG RENAMED : " + obj);
-
-        //TODO REPLACE ACTUAL JSON WITH THE NEW ONE WIHT RENAMED FIELD
+    public JSONHelper getJsonHelper() {
+        return jsonHelper;
     }
 
     public void sendMessage(String message) {
-        Main.sendMessage(s + message);
-    }
-
-    private void copyFileUsingStream(File source, File dest) throws IOException {
-        InputStream is = new FileInputStream(source);
-        OutputStream os = new FileOutputStream(dest);
-        byte[] buffer = new byte[1024];
-        int length;
-        while ((length = is.read(buffer)) > 0) {
-            os.write(buffer, 0, length);
-        }
-        is.close();
-        os.close();
+        Main.sendMessage(PREFIX + message);
     }
 
 }
