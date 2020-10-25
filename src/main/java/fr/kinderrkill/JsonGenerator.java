@@ -22,13 +22,13 @@ public class JsonGenerator {
 
     public void launch() {
         try {
-            File baseFile = new File(JsonGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            File baseFile = new File(JsonGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
             File templatesConfig = new File(baseFile + "/assets/templates-config.json");
             jsonHelper = new JSONHelper(templatesConfig);
 
             blockStateDir = new File(baseFile + "/assets/blockstate/");
-            modelBlocksDir = new File(baseFile + "/assets/model-blocks/");
-            modelItemsDir = new File(baseFile + "/assets/model-items/");
+            modelBlocksDir = new File(baseFile + "/assets/model_blocks/");
+            modelItemsDir = new File(baseFile + "/assets/model_items/");
 
             sendMessage("Started successfully at the location : " + baseFile.getAbsolutePath());
         } catch (URISyntaxException e) {
@@ -42,7 +42,7 @@ public class JsonGenerator {
 
         //Parents Files
         File blockStateParent = new File(blockStateDir + "/parents/" + jsonHelper.getStringFromTemplate("blockstate") + ".json");
-        File modelItemParent = new File(modelItemsDir + "/parents/" + jsonHelper.getStringFromTemplate("model-items") + ".json");
+        File modelItemParent = new File(modelItemsDir + "/parents/" + jsonHelper.getStringFromTemplate("model_items") + ".json");
 
         List<File> modelBlocksParent = new ArrayList<>();
         jsonHelper.getBlocksModels().forEach(model -> modelBlocksParent.add(new File(modelBlocksDir + "/parents/" + model + ".json")));
@@ -54,7 +54,7 @@ public class JsonGenerator {
         //Define models blocks
         for (File f : modelBlocksParent) {
             if(modelBlocksParent.size() > 1) {
-                modelBlock.put(f, new File(modelBlocksDir + "/" + f.getName().replaceFirst("[.][^.]+$", "") + "-" + modelName + ".json"));
+                modelBlock.put(f, new File(modelBlocksDir + "/" + f.getName().replaceFirst("[.][^.]+$", "") + "_" + modelName + ".json"));
             } else {
                 modelBlock.put(f, new File(modelBlocksDir + "/" + modelName + ".json"));
             }

@@ -1,16 +1,12 @@
 package fr.kinderrkill;
 
 import fr.kinderrkill.gui.GuiMain;
+import fr.kinderrkill.utils.Lang;
 
 public class Main {
 
     public static void main(String[] args) {
-        /*JsonGenerator generator = new JsonGenerator();
-        try {
-            generator.start();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }*/
+        //Lang.isFrench = System.getProperty("user.language").equalsIgnoreCase("fr");
         GuiMain guiMain = new GuiMain();
         guiMain.launch();
     }
