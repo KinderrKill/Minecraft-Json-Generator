@@ -4,6 +4,30 @@
     "model_blocks": "tile",
     "model_items": "tile"
   },
+  "bracket_normal": {
+    "blockstate": "bracket_normal",
+    "model_blocks": [
+      "bracket_normal_0",
+      "bracket_normal_1",
+	  "bracket_normal_2",
+	  "bracket_normal_3"
+    ],
+    "model_items": "bracket_normal"
+  },
+  "bracket_extended": {
+    "blockstate": "bracket_extended",
+    "model_blocks": [
+      "bracket_extended_0",
+      "bracket_extended_1",
+	  "bracket_extended_2",
+	  "bracket_extended_3",
+	  "bracket_extended_vertical_0",
+      "bracket_extended_vertical_1",
+	  "bracket_extended_vertical_2",
+	  "bracket_extended_vertical_3"
+    ],
+    "model_items": "bracket_extended"
+  },
   "template_slab": {
     "blockstate": "slabBlockState",
     "model_blocks": [

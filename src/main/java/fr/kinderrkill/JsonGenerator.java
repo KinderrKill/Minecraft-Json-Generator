@@ -9,7 +9,6 @@ import java.util.*;
 public class JsonGenerator {
 
     private final String PREFIX = "[JsonGenerator] ";
-    private final Scanner SCANNER = new Scanner(System.in);
 
     private JSONHelper jsonHelper;
 
@@ -44,8 +43,8 @@ public class JsonGenerator {
         jsonHelper.getBlocksModels().forEach(model -> modelBlocksParent.add(new File(modelBlocksDir + "/parents/" + model + ".json")));
 
         //News Files
-        File newBlockState = new File(blockStateDir + "/" + modelName + ".json");
-        File newModelItems = new File(modelItemsDir + "/" + modelName + ".json");
+        File newBlockState = new File(blockStateDir + "/" + jsonHelper.getTemplateName() + "_" + modelName + ".json");
+        File newModelItems = new File(modelItemsDir + "/" + jsonHelper.getTemplateName() + "_" + modelName + ".json");
 
         //Define models blocks
         for (File f : modelBlocksParent) {
@@ -58,7 +57,7 @@ public class JsonGenerator {
 
         //Create renamed JSON
         createJson(newBlockState, jsonHelper.getRenamedObject(blockStateParent, "$BLOCK", modelName));
-        createJson(newModelItems, jsonHelper.getRenamedObject(modelItemParent, "$ITEM", modelTexture));
+        createJson(newModelItems, jsonHelper.getRenamedObject(modelItemParent, "$ITEM", modelName));
 
         for (File f : modelBlock.keySet()) {
             File destination = modelBlock.get(f);

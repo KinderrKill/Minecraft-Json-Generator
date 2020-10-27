@@ -1,28 +1,17 @@
 {
-  "template_slab": {
-    "texture": "$SLAB",
-    "blockstate": "slab",
-    "model-blocs": [
-      "slab-lower",
-      "slab-upper"
-    ],
-    "model-items": "slab"
-  },
-  "template_test": {
+  "tile": {
     "texture": "$TEST",
-    "blockstate": "testBlockState",
-    "model-blocs": "testBlockState",
-    "model-items": "testBlockState"
+    "blockstate": "tile",
+    "model-blocs": "tile",
+    "model-items": "tile"
   },
-  "template_test_2": {
-    "texture": "$TEST2",
-    "blockstate": "test2",
+  "slab": {
+    "texture": "$SLAB",
+    "blockstate": "slabBlockState",
     "model-blocs": [
-      "test2-lower",
-      "test2-upper",
-      "test3",
-      "test4"
+      "slab_lower",
+      "slab_upper"
     ],
-    "model-items": "test2"
+    "model-items": "slabItem"
   }
 }

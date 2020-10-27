@@ -31,8 +31,11 @@ public class JSONHelper {
         try {
             JSONObject jsonFile = (JSONObject) parser.parse(new FileReader(base));
             String json = jsonFile.toJSONString();
-            json = json.replace(key, value);
-            return (JSONObject) parser.parse(json);
+            System.out.println("Actuel Object : " + json);
+            json = json.replace("\\/", "/").replace(key, value);
+            JSONObject jsonObject = (JSONObject) parser.parse(json);
+            System.out.println("Renamed Object : " + jsonObject);
+            return jsonObject;
         } catch (IOException | ParseException e) {
             e.printStackTrace();
             return null;
@@ -76,6 +79,10 @@ public class JSONHelper {
             return list;
         }
         return Arrays.asList(getTemplateFromConfig(templateName).get("model_blocks").toString());
+    }
+
+    public String getTemplateName() {
+        return templateName;
     }
 
 }
