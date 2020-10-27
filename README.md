@@ -1,7 +1,7 @@
 # Minecraft JSON Generator
 
 Minecraft JSON Generator is a simple program that allow you to generate with template JSON file for your Blocks.
-
+NOTE : It's my first public program in JAVA also my first readme and github project so, be cool with me and leave a star if you find the program usefull
 
 ## Installation
 
@@ -93,6 +93,8 @@ Yu can launch "MinecraftJsonGenerator" by double click on it.
 3) Define the block name
 4) Define the block texture
 5) Click on generate JSON files
+
+Generated files gonna be in blockstate, model_blocks and model_items
 
 ## Youtube videos
 
