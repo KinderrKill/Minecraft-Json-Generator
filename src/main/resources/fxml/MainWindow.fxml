@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="541.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.kinderrkill.Controller">
+   <children>
+      <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="548.0" prefWidth="231.0" style="-fx-background-color: #3F2B63;">
+         <children>
+            <Pane prefHeight="112.0" prefWidth="231.0">
+               <children>
+                  <Hyperlink fx:id="hyperlink" layoutX="60.0" layoutY="84.0" onAction="#handleClicks" text="V.2.0 | GitHub Page" textFill="#ff46b8" />
+                  <ImageView fitHeight="89.0" fitWidth="159.0" layoutX="71.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../default_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button fx:id="modelButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="▓ | Modèles" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Glow level="0.2" />
+               </effect>
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></Button>
+            <Button fx:id="definitionButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="≈ | Définition" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Glow level="0.2" />
+               </effect>
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="generateButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="֍ | Générer" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Glow level="0.2" />
+               </effect>
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="100.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="ꭙ | Quitter l'application" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Glow level="0.2" />
+               </effect>
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="120.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <Label alignment="CENTER" layoutX="354.0" layoutY="20.0" prefHeight="25.0" prefWidth="294.0" text="Minecraft JSON Generator" underline="true">
+         <font>
+            <Font name="Century Gothic" size="20.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="frenchLangButton" layoutX="684.0" layoutY="520.0" mnemonicParsing="false" onAction="#handleLangSwitch" selected="true" text="Français" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="7.0" />
+      <RadioButton fx:id="englishLangButton" layoutX="684.0" layoutY="505.0" mnemonicParsing="false" onAction="#handleLangSwitch" text="English" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="505.0" />
+   </children>
+</AnchorPane>

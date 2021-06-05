@@ -1,7 +1,7 @@
-package fr.kinderrkill.gui;
+package fr.kinderrkill.old.gui;
 
-import fr.kinderrkill.JsonGenerator;
-import fr.kinderrkill.utils.Lang;
+import fr.kinderrkill.old.JsonGenerator;
+import fr.kinderrkill.old.utils.Lang;
 
 import javax.swing.*;
 import java.awt.*;

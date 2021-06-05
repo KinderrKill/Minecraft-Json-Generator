@@ -1,4 +1,4 @@
-package fr.kinderrkill.utils;
+package fr.kinderrkill.old.utils;
 
 import java.io.UnsupportedEncodingException;
 

@@ -1,4 +1,4 @@
-package fr.kinderrkill;
+package fr.kinderrkill.old;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

@@ -1,5 +1,6 @@
-package fr.kinderrkill;
+package fr.kinderrkill.old;
 
+import fr.kinderrkill.Main;
 import org.json.simple.JSONObject;
 
 import java.io.*;
