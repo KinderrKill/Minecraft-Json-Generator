@@ -7,10 +7,10 @@ import java.util.stream.Stream;
 public class Lang {
 
     private enum FRENCH {
-       MODEL("#Model", "Modèle"),
-        DEFINE("#Define", "Définition"),
-        GENERATE("#Generate", "Générer"),
-        QUIT("#QUIT", "Quitter l'application");
+       MODEL("#Model", "▓ | Modèle"),
+        DEFINE("#Define", "≈ | Définition"),
+        GENERATE("#Generate", "֎| Générer"),
+        QUIT("#Quit", "ꭕ | Quitter l'application");
        ;
 
        private final String key;
@@ -31,10 +31,10 @@ public class Lang {
     }
 
     private enum ENGLISH {
-        MODEL("#Model", "Model"),
-        DEFINE("#Define", "Define"),
-        GENERATE("#Generate", "Generate"),
-        QUIT("#QUIT", "Quit the application");
+        MODEL("#Model", "▓ | Model"),
+        DEFINE("#Define", "≈ | Define"),
+        GENERATE("#Generate", "֎ | Generate"),
+        QUIT("#Quit", "ꭕ | Quit the application");
         ;
 
         private final String key;
@@ -54,8 +54,8 @@ public class Lang {
         }
     }
 
-    public static String getTranslation(String key) {
-        if (Config.isEnglish) {
+    public static String getTranslation(boolean isEnglish, String key) {
+        if (isEnglish) {
            Optional<ENGLISH> val = Stream.of(ENGLISH.values()).filter(value -> value.getKey().equalsIgnoreCase(key)).findFirst();
            if (val.isPresent()) return val.get().getTranslation();
            else return "#NULL";

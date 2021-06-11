@@ -23,8 +23,6 @@ public class Config {
 
                 properties.load(in);
                 isEnglish = get("LANG").equalsIgnoreCase("english");
-
-                System.out.println("Lang used by default ? " + get("LANG") + " || IsEnglish : " + isEnglish);
             } catch (IOException | NullPointerException | URISyntaxException e) {
                 e.printStackTrace();
             }

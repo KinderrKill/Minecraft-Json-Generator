@@ -1,6 +1,7 @@
 package fr.kinderrkill;
 
 import fr.kinderrkill.utils.Config;
+import fr.kinderrkill.utils.Lang;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -27,6 +28,8 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         englishLangButton.setSelected(Config.isEnglish);
         frenchLangButton.setSelected(!Config.isEnglish);
+
+        updateLanguage();
     }
 
     @FXML
@@ -40,6 +43,8 @@ public class Controller implements Initializable {
             englishLangButton.setSelected(true);
             frenchLangButton.setSelected(false);
         }
+
+        updateLanguage();
     }
 
     @FXML
@@ -47,7 +52,6 @@ public class Controller implements Initializable {
         if (event.getSource() == closeButton) {
             Config.set("LANG", englishLangButton.isSelected() ? "english" : "french");
 
-            //Config.save();
             Config.save();
 
             Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
@@ -71,6 +75,13 @@ public class Controller implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void updateLanguage() {
+        modelButton.setText(Lang.getTranslation(englishLangButton.isSelected(), "#Model"));
+        definitionButton.setText(Lang.getTranslation(englishLangButton.isSelected(), "#Define"));
+        generateButton.setText(Lang.getTranslation(englishLangButton.isSelected(), "#Generate"));
+        closeButton.setText(Lang.getTranslation(englishLangButton.isSelected(), "#Quit"));
     }
 
     @FXML
