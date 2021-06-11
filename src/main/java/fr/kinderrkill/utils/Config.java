@@ -1,26 +1,34 @@
 package fr.kinderrkill.utils;
 
+import fr.kinderrkill.old.JsonGenerator;
+
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Properties;
 
 public class Config {
 
     private static Properties properties = null;
+    public static boolean isEnglish;
 
     public static void load() {
         if (properties == null) {
             properties = new Properties();
             try {
-                InputStream is = Config.class.getResourceAsStream("/Config.properties");
-                properties.load(is);
-                // TODO: If 'is' is null -> Display error dialog and quit
-                is.close();
-            } catch (IOException | NullPointerException e) {
+                File baseFile = new File(JsonGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
+
+                File file = new File(baseFile + "/Config.properties");
+                InputStream in = file.toURL().openStream();
+
+                properties.load(in);
+                isEnglish = get("LANG").equalsIgnoreCase("english");
+
+                System.out.println("Lang used by default ? " + get("LANG") + " || IsEnglish : " + isEnglish);
+            } catch (IOException | NullPointerException | URISyntaxException e) {
                 e.printStackTrace();
             }
         }
-
-        System.out.println("Lang used by default ? " + get("LANG"));
     }
 
     public static String get(String key) {
@@ -33,14 +41,17 @@ public class Config {
 
     public static void save() {
         try {
-            File file = new File("Config.properties");
-            System.out.println("File " + file.exists());
+            File baseFile = new File(JsonGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
+
+            File file = new File(baseFile + "/Config.properties");
             if (!file.exists()) return; // TODO: Do dialog error "close without saving properties"
+
+            System.out.println("File path SAVE : " + file.getAbsolutePath());
 
             FileOutputStream out = new FileOutputStream(file);
             properties.store(out, null);
             out.close();
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
     }

@@ -24,7 +24,10 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+        englishLangButton.setSelected(Config.isEnglish);
+        frenchLangButton.setSelected(!Config.isEnglish);
+    }
 
     @FXML
     private void handleLangSwitch(ActionEvent event) {
@@ -44,10 +47,11 @@ public class Controller implements Initializable {
         if (event.getSource() == closeButton) {
             Config.set("LANG", englishLangButton.isSelected() ? "english" : "french");
 
+            //Config.save();
             Config.save();
 
-            //Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-            //stage.close();
+            Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+            stage.close();
         }
         else if (event.getSource() == modelButton) {
             System.out.println("Model button pressed !");

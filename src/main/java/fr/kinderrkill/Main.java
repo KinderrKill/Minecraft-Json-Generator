@@ -15,10 +15,6 @@ import javafx.stage.StageStyle;
 public class Main extends Application {
 
     public static void main(String[] args) {
-        //Lang.isFrench = System.getProperty("user.language").equalsIgnoreCase("fr");
-        //GuiMain guiMain = new GuiMain();
-        //guiMain.launch();
-
         Config.load();
 
         launch(args);

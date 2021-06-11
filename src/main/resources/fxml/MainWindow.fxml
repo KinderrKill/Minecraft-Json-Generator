@@ -28,7 +28,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button fx:id="modelButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="▓ | Modèles" textFill="WHITE">
+            <Button fx:id="modelButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="▓ | #Model" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -41,7 +41,7 @@
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin></Button>
-            <Button fx:id="definitionButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="≈ | Définition" textFill="WHITE">
+            <Button fx:id="definitionButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="≈ | #Define" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -55,7 +55,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="generateButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="֍ | Générer" textFill="WHITE">
+            <Button fx:id="generateButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="֍ | #Generate" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -69,7 +69,7 @@
                   <Insets bottom="10.0" top="100.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="ꭙ | Quitter l'application" textFill="WHITE">
+            <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="ꭙ | #Quit" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
