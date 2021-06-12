@@ -1,13 +1,12 @@
-package fr.kinderrkill.old;
+package fr.old;
 
-import fr.kinderrkill.Main;
 import org.json.simple.JSONObject;
 
 import java.io.*;
 import java.net.URISyntaxException;
 import java.util.*;
 
-public class JsonGenerator {
+public class OldJsonGenerator {
 
     private final String PREFIX = "[JsonGenerator] ";
 
@@ -19,7 +18,7 @@ public class JsonGenerator {
 
     public void launch() {
         try {
-            File baseFile = new File(JsonGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
+            File baseFile = new File(OldJsonGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
             File templatesConfig = new File(baseFile + "/assets/templates-config.json");
             jsonHelper = new JSONHelper(templatesConfig);
 
@@ -80,7 +79,7 @@ public class JsonGenerator {
     }
 
     public void sendMessage(String message) {
-        Main.sendMessage(PREFIX + message);
+        //Main.sendMessage(PREFIX + message);
     }
 
 }

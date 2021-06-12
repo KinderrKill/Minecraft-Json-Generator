@@ -1,7 +1,7 @@
-package fr.kinderrkill.old.gui;
+package fr.old.gui;
 
-import fr.kinderrkill.old.JsonGenerator;
-import fr.kinderrkill.old.utils.Lang;
+import fr.old.OldJsonGenerator;
+import fr.old.utils.Lang;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class GuiMain extends JFrame implements ActionListener {
 
-    private JsonGenerator generator;
+    private OldJsonGenerator generator;
 
     private JComboBox templates;
     private JButton validateButton;
@@ -19,7 +19,7 @@ public class GuiMain extends JFrame implements ActionListener {
     private JButton generateButton;
 
     public void launch() {
-        generator = new JsonGenerator();
+        generator = new OldJsonGenerator();
         generator.launch();
 
         setTitle("Minecraft JSON Generator");
