@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -103,12 +104,25 @@
             <Label fx:id="paneLabelDirectory" layoutX="22.0" layoutY="14.0" text="/assets/templates-config.json" />
          </children>
       </Pane>
-      <Pane fx:id="mainPane" layoutX="255.0" layoutY="156.0" prefHeight="335.0" prefWidth="618.0">
+      <Pane fx:id="mainPane" layoutX="255.0" layoutY="156.0" prefHeight="381.0" prefWidth="618.0">
          <children>
             <ListView fx:id="modelMainList" layoutX="6.0" layoutY="23.0" prefHeight="305.0" prefWidth="607.0" />
             <Label fx:id="paneLabelDirectory1" layoutX="8.0" layoutY="2.0" text="Modèles disponibles :" />
+            <Button fx:id="modelValidateButton" layoutX="246.0" layoutY="336.0" mnemonicParsing="false" onAction="#handleValidateModel" prefHeight="36.0" prefWidth="126.0" text="Valider le modèle" />
          </children>
       </Pane>
-      <Button fx:id="modelValidateButton" layoutX="501.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleValidateModel" prefHeight="36.0" prefWidth="126.0" text="Valider le modèle" />
+      <Pane fx:id="definePane" layoutX="251.0" layoutY="176.0" prefHeight="330.0" prefWidth="632.0">
+         <children>
+            <Label fx:id="paneLabelDirectory11" layoutY="2.0" text="Blockstate :" underline="true" />
+            <TextField fx:id="blockstateField" layoutY="37.0" onAction="#handleTextField" />
+            <Label fx:id="paneLabelDirectory111" layoutY="110.0" text="Modèle Blocks :" underline="true" />
+            <TextField fx:id="modelBlockField1" layoutY="144.0" onAction="#handleTextField" />
+            <TextField fx:id="modelBlockField2" layoutX="161.0" layoutY="144.0" onAction="#handleTextField" />
+            <TextField fx:id="modelBlockField3" layoutX="322.0" layoutY="144.0" onAction="#handleTextField" />
+            <TextField fx:id="modelBlockField4" layoutX="483.0" layoutY="144.0" onAction="#handleTextField" />
+            <Label fx:id="paneLabelDirectory112" layoutX="1.0" layoutY="222.0" text="Modèle Item :" underline="true" />
+            <TextField fx:id="modelItem" layoutY="257.0" onAction="#handleTextField" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

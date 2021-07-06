@@ -1,6 +1,7 @@
 package fr.kinderrkill.listeners;
 
 import fr.kinderrkill.JSONGenerator;
+import fr.kinderrkill.objects.Template;
 import fr.kinderrkill.utils.Config;
 import fr.kinderrkill.utils.Lang;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -30,6 +32,7 @@ public class Controller implements Initializable {
 
         updateLanguage();
 
+        definePane.setVisible(false);
         this.paneLabelName.setText("I - " + Lang.getTranslation("#Model"));
         modelMainList.getItems().addAll(jsonGenerator.templateManager.getTemplatesForList());
     }
@@ -93,6 +96,15 @@ public class Controller implements Initializable {
         }
     }
 
+    @FXML
+    private void handleTextField(ActionEvent event) {
+        System.out.println("Event TextField : " + event.getSource());
+    }
+
+    private void updateDefineTab(Template template) {
+
+    }
+
     private void updateLanguage() {
         Config.isEnglish = englishLangButton.isSelected();
 
@@ -112,6 +124,7 @@ public class Controller implements Initializable {
         if (Config.actualTab != Config.ScreenTab.MODEL) return;
 
         paneLabelName.setText("I - " + Lang.getTranslation("#Model"));
+        definePane.setVisible(false);
         mainPane.setVisible(true);
         modelMainList.getItems().clear();
         modelMainList.getItems().addAll(jsonGenerator.templateManager.getTemplatesForList());
@@ -122,6 +135,7 @@ public class Controller implements Initializable {
 
         paneLabelName.setText("II - " + Lang.getTranslation("#Define"));
         mainPane.setVisible(false);
+        definePane.setVisible(true);
     }
 
     @FXML
@@ -162,4 +176,36 @@ public class Controller implements Initializable {
 
     @FXML
     private Button modelValidateButton;
+
+    // Define
+
+    @FXML
+    private Pane definePane;
+
+    @FXML
+    private Label paneLabelDirectory11;
+
+    @FXML
+    private TextField blockstateField;
+
+    @FXML
+    private Label paneLabelDirectory111;
+
+    @FXML
+    private TextField modelBlockField1;
+
+    @FXML
+    private TextField modelBlockField2;
+
+    @FXML
+    private TextField modelBlockField3;
+
+    @FXML
+    private TextField modelBlockField4;
+
+    @FXML
+    private Label paneLabelDirectory112;
+
+    @FXML
+    private TextField modelItem;
 }
