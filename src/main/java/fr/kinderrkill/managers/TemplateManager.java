@@ -22,6 +22,8 @@ public class TemplateManager {
 
     private List<Template> templates;
 
+    private Template selectedTemplate;
+
     // JSON Utils
     private final JSONParser parser = new JSONParser();
 
@@ -54,13 +56,35 @@ public class TemplateManager {
         return this.templates.stream().filter(value -> value.getKey().equalsIgnoreCase(key)).findFirst();
     }
 
+    public void defineSelectedTemplate(Template template) {
+        this.selectedTemplate = template;
+    }
+
+    public Template getSelectedTemplate() {
+        return this.selectedTemplate;
+    }
+
     // Utils
     public List<String> getTemplatesForList() {
         List<String> list = new ArrayList<>();
         this.templates.forEach(value -> {
-            list.add(new String(value.getKey() + " | BlockState : " + value.getBlockState() + " | ModelBlocs : " + value.getModelsBlocks() + " | ModelItem : " + value.getModelItem()));
+            String modelBlocksValue = value.getModelsBlocks() != null ? value.getModelsBlocks() : value.getArrayofModelsBlocks() != null ? value.getArrayofModelsBlocks().toString() : "ERROR 404";
+            list.add(new String(value.getKey() + " | BlockState : " + value.getBlockState() + " | ModelBlocs : " + modelBlocksValue + " | ModelItem : " + value.getModelItem()));
         });
         return list;
     }
 
+    public JSONObject getRenamedTemplate(File base, String key, String value) {
+        try {
+            System.out.println("File : " + base + " for KEY : " + key + " with value " + value);
+            JSONObject jsonFile = (JSONObject) parser.parse(new FileReader(base));
+            String json = jsonFile.toJSONString();
+            json = json.replace("\\/", "/").replace(key, value);
+            JSONObject jsonObject = (JSONObject) parser.parse(json);
+            return jsonObject;
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

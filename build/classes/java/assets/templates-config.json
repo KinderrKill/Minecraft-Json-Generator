@@ -1,4 +1,9 @@
 {
+  "template_basicTest": {
+    "blockstate": "testBlockState",
+    "model_blocks": "testBlock",
+    "model_items": "testItem"
+  },
   "template_tile": {
     "blockstate": "tile",
     "model_blocks": "tile",

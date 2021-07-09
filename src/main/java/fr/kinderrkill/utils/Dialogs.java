@@ -19,6 +19,12 @@ public class Dialogs {
                 "-> Fichier Properties introuvable !").showAndWait();
     }
 
+    public static void showTemplateNotCorrect() {
+        generateAlert(Alert.AlertType.ERROR,
+                "Erreur validation Template :",
+                "-> Le template est incorrecte !").showAndWait();
+    }
+
     public static void showExitWithoutSaving() {
         generateAlert(Alert.AlertType.INFORMATION,
         "Erreur fermeture MinecraftJSONGenerator :",
@@ -29,6 +35,12 @@ public class Dialogs {
         generateAlert(Alert.AlertType.INFORMATION,
                 "Erreur fermeture MinecraftJSONGenerator :",
                 "-> Sauvegarde du fichier Properties impossible !").showAndWait();
+    }
+
+    public static void generateWithSuccess() {
+        generateAlert(Alert.AlertType.CONFIRMATION,
+                "MinecraftJSONGenerator :",
+                "-> Fichiers générés avec succès !").show();
     }
 
     // Utils

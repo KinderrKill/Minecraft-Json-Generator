@@ -1,8 +1,10 @@
 package fr.kinderrkill.listeners;
 
 import fr.kinderrkill.JSONGenerator;
+import fr.kinderrkill.managers.JSONFileManager;
 import fr.kinderrkill.objects.Template;
 import fr.kinderrkill.utils.Config;
+import fr.kinderrkill.utils.Dialogs;
 import fr.kinderrkill.utils.Lang;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -92,17 +94,22 @@ public class Controller implements Initializable {
             System.out.println("Validate model button pushed ! ");
             String selectedString = modelMainList.getSelectionModel().getSelectedItem();
             selectedString = selectedString.substring(0, selectedString.indexOf("|") - 1);
-            System.out.println("Selected model is [" + jsonGenerator.templateManager.getTemplate(selectedString).get().getKey() + "]");
+            if (!jsonGenerator.templateManager.getTemplate(selectedString).isPresent()) {
+                Dialogs.showTemplateNotCorrect();
+            } else {
+                jsonGenerator.templateManager.defineSelectedTemplate(jsonGenerator.templateManager.getTemplate(selectedString).get());
+                Config.actualTab = Config.ScreenTab.DEFINE;
+                updateDefineTab();
+            }
         }
     }
 
     @FXML
-    private void handleTextField(ActionEvent event) {
-        System.out.println("Event TextField : " + event.getSource());
-    }
+    private void handleGenerateButton(ActionEvent event) {
+        if (Config.actualTab != Config.ScreenTab.DEFINE) return;
 
-    private void updateDefineTab(Template template) {
-
+        JSONFileManager manager = new JSONFileManager();
+        manager.generateJSON(jsonGenerator.templateManager.getSelectedTemplate(), blockstateField.getText(), modelItem.getText());
     }
 
     private void updateLanguage() {
@@ -135,7 +142,13 @@ public class Controller implements Initializable {
 
         paneLabelName.setText("II - " + Lang.getTranslation("#Define"));
         mainPane.setVisible(false);
+
         definePane.setVisible(true);
+    }
+
+    @FXML
+    private void handleTextField(ActionEvent event) {
+        System.out.println("Event TextField : " + event.getSource());
     }
 
     @FXML
@@ -183,28 +196,13 @@ public class Controller implements Initializable {
     private Pane definePane;
 
     @FXML
-    private Label paneLabelDirectory11;
+    private Label defineLabelBlockState;
 
     @FXML
     private TextField blockstateField;
 
     @FXML
-    private Label paneLabelDirectory111;
-
-    @FXML
-    private TextField modelBlockField1;
-
-    @FXML
-    private TextField modelBlockField2;
-
-    @FXML
-    private TextField modelBlockField3;
-
-    @FXML
-    private TextField modelBlockField4;
-
-    @FXML
-    private Label paneLabelDirectory112;
+    private Label defineLabelModelItem;
 
     @FXML
     private TextField modelItem;

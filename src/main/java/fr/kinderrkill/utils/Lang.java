@@ -6,10 +6,10 @@ import java.util.stream.Stream;
 public class Lang {
 
     private enum FRENCH {
-       MODEL("#Model", "Mod\u00e8le"),
-        DEFINE("#Define", "D\u00e9finition"),
-        GENERATE("#Generate", "G\u00e9n\u00e9rer"),
-        QUIT("#Quit", "Quitter l'application");
+        MODEL("#Model", "▓ | Modèle"),
+        DEFINE("#Define", "≈ | Définition"),
+        GENERATE("#Generate", "֍ | Générer"),
+        QUIT("#Quit", "ꭙ | Quitter");
        ;
 
        private final String key;
@@ -30,10 +30,10 @@ public class Lang {
     }
 
     private enum ENGLISH {
-        MODEL("#Model", "Model"),
-        DEFINE("#Define", "Define"),
-        GENERATE("#Generate", "Generate"),
-        QUIT("#Quit", "Quit the application");
+        MODEL("#Model", "▓ | Model"),
+        DEFINE("#Define", "≈ | Define"),
+        GENERATE("#Generate", "֍ | Generate"),
+        QUIT("#Quit", "ꭙ | Quit");
         ;
 
         private final String key;

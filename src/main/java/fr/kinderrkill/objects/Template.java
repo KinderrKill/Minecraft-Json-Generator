@@ -2,12 +2,20 @@ package fr.kinderrkill.objects;
 
 import org.json.simple.JSONArray;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class Template {
 
     private final String key;
     private final String blockstate;
-    private final String modelsBlocks;
+    private String modelsBlocks;
     private final String modelItem;
+
+    private JSONArray modelsBlocksArray;
+    private boolean haveMultipleModelsBlocks;
 
     public Template(String key, String blockstate, String modelsBlocks, String modelItem) {
         this.key = key;
@@ -20,8 +28,8 @@ public class Template {
         this.key = (String) key;
         this.blockstate = (String) blockstate;
         if (modelsBlocks instanceof JSONArray) {
-            JSONArray jsonArray = (JSONArray) modelsBlocks;
-            this.modelsBlocks = jsonArray.toJSONString();
+            this.modelsBlocksArray = (JSONArray) modelsBlocks;
+            this.haveMultipleModelsBlocks = true;
         } else {
             this.modelsBlocks = (String) modelsBlocks;
         }
@@ -38,6 +46,20 @@ public class Template {
 
     public String getModelsBlocks() {
         return modelsBlocks;
+    }
+
+    public boolean isMultipleModelsBlocks() { return haveMultipleModelsBlocks; }
+
+    public JSONArray getArrayofModelsBlocks() { return modelsBlocksArray; }
+
+    public List<String> getModelsBlocksList() {
+        if (haveMultipleModelsBlocks) {
+            List<String> list = new ArrayList<>();
+            modelsBlocksArray.forEach(model -> list.add(model.toString()));
+            return list;
+        } else {
+            return Collections.singletonList(modelsBlocks);
+        }
     }
 
     public String getModelItem() {

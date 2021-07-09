@@ -57,7 +57,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="generateButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="֍ | #Generate" textFill="WHITE">
+            <Button fx:id="generateButton" mnemonicParsing="false" onAction="#handleGenerateButton" prefHeight="45.0" prefWidth="231.0" stylesheets="@../css/MainWindowStyling.css" text="֍ | #Generate" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -113,15 +113,10 @@
       </Pane>
       <Pane fx:id="definePane" layoutX="251.0" layoutY="176.0" prefHeight="330.0" prefWidth="632.0">
          <children>
-            <Label fx:id="paneLabelDirectory11" layoutY="2.0" text="Blockstate :" underline="true" />
-            <TextField fx:id="blockstateField" layoutY="37.0" onAction="#handleTextField" />
-            <Label fx:id="paneLabelDirectory111" layoutY="110.0" text="Modèle Blocks :" underline="true" />
-            <TextField fx:id="modelBlockField1" layoutY="144.0" onAction="#handleTextField" />
-            <TextField fx:id="modelBlockField2" layoutX="161.0" layoutY="144.0" onAction="#handleTextField" />
-            <TextField fx:id="modelBlockField3" layoutX="322.0" layoutY="144.0" onAction="#handleTextField" />
-            <TextField fx:id="modelBlockField4" layoutX="483.0" layoutY="144.0" onAction="#handleTextField" />
-            <Label fx:id="paneLabelDirectory112" layoutX="1.0" layoutY="222.0" text="Modèle Item :" underline="true" />
-            <TextField fx:id="modelItem" layoutY="257.0" onAction="#handleTextField" />
+            <Label fx:id="defineLabelBlockState" layoutY="2.0" prefHeight="23.0" prefWidth="115.0" text="Nom de votre block :" underline="true" />
+            <TextField fx:id="blockstateField" layoutY="37.0" onAction="#handleTextField" prefHeight="27.0" prefWidth="345.0" />
+            <Label fx:id="defineLabelModelItem" layoutX="1.0" layoutY="112.0" prefHeight="23.0" prefWidth="115.0" text="Nom de la texture :" underline="true" />
+            <TextField fx:id="modelItem" layoutY="140.0" onAction="#handleTextField" prefHeight="23.0" prefWidth="345.0" />
          </children>
       </Pane>
    </children>
